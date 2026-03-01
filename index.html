@@ -92,9 +92,38 @@
             opacity: 1;
             padding-bottom: 2rem;
         }
+
+        /* Banner Transitions */
+        #tc-banner {
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-violet-500 selection:text-white">
+<body class="antialiased selection:bg-violet-500 selection:text-white overflow-hidden"> <audio id="bg-audio" loop src="https://cdn.ai-music-generator.ai/NmM0YjJmZTUtNDk1ZC00YWM2LWEwMGQtMmJiNDZiZGI2MjM5.mp3"></audio>
+
+    <div id="tc-banner" class="fixed inset-0 z-[100] flex items-center justify-center bg-[#050505]/95 backdrop-blur-xl">
+        <div class="glass-panel p-8 md:p-10 rounded-3xl max-w-lg w-[90%] text-center border border-white/10 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-violet-600/20 blur-[50px] pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-32 h-32 bg-cyan-600/20 blur-[50px] pointer-events-none"></div>
+            
+            <div class="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-violet-400 relative z-10">
+                <i data-lucide="shield-check" class="w-8 h-8"></i>
+            </div>
+            
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 relative z-10" data-i18n="tc_title">Welcome to Aura</h2>
+            <p class="text-gray-400 text-sm md:text-base mb-8 leading-relaxed relative z-10" data-i18n="tc_desc">
+                By entering this site, you agree to our Terms of Service and Privacy Policy. This platform is exclusively reserved for artists, labels, and B2B partners of Horizon Global.
+            </p>
+            
+            <button onclick="acceptTermsAndEnter()" class="w-full btn-primary py-4 rounded-xl font-bold text-white text-lg shadow-lg relative z-10">
+                <span data-i18n="btn_accept">Accept & Enter</span>
+            </button>
+        </div>
+    </div>
+
+    <button id="mute-btn" onclick="toggleMute()" class="fixed bottom-6 right-6 z-50 p-3 glass-panel rounded-full text-white hover:bg-white/10 transition hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+        <i id="mute-icon" data-lucide="volume-2" class="w-5 h-5"></i>
+    </button>
 
     <div class="ambient-glow"></div>
     <div class="ambient-glow-2"></div>
@@ -354,6 +383,44 @@
     <script>
         lucide.createIcons();
 
+        // ----------------------------------------
+        // Audio & Terms Acceptance Gate Logic
+        // ----------------------------------------
+        const audioEl = document.getElementById('bg-audio');
+        const tcBanner = document.getElementById('tc-banner');
+        const muteBtn = document.getElementById('mute-btn');
+        const muteIcon = document.getElementById('mute-icon');
+
+        // Imposta un volume piacevole di base (40%)
+        audioEl.volume = 0.4;
+
+        function acceptTermsAndEnter() {
+            // Fai sparire il banner con un fade-out
+            tcBanner.style.opacity = '0';
+            tcBanner.style.visibility = 'hidden';
+            
+            // Sblocca lo scroll della pagina
+            document.body.classList.remove('overflow-hidden');
+            
+            // Fai partire la musica (il browser lo permette perché l'utente ha fatto click)
+            audioEl.play().catch(err => console.log("Errore autoplay:", err));
+            
+            // Mostra il bottone per mutare l'audio
+            muteBtn.classList.remove('hidden');
+        }
+
+        function toggleMute() {
+            if (audioEl.muted) {
+                audioEl.muted = false;
+                muteIcon.setAttribute('data-lucide', 'volume-2');
+            } else {
+                audioEl.muted = true;
+                muteIcon.setAttribute('data-lucide', 'volume-x');
+            }
+            lucide.createIcons();
+        }
+
+
         // Safe Mobile Menu Toggle (Does not break Lucide SVGs)
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -406,6 +473,7 @@
         // 100% Complete Translation Dictionary
         const translations = {
             en: {
+                tc_title: "Welcome to Aura", tc_desc: "By entering this site, you agree to our Terms of Service and Privacy Policy. This platform is exclusively reserved for artists, labels, and B2B partners of Horizon Global.", btn_accept: "Accept & Enter",
                 nav_ecosystem: "Ecosystem", nav_infrastructure: "Infrastructure", nav_legal: "Legal & Trust", nav_app: "App", nav_portal: "Portal",
                 hero_badge: "Official Label & Distribution Hub",
                 hero_title: "The Future of <br/><span class='text-gradient'>Music Distribution.</span>",
@@ -425,6 +493,7 @@
                 footer_hq: "Corporate Headquarters", footer_legal: "Legal & Support"
             },
             it: {
+                tc_title: "Benvenuto in Aura", tc_desc: "Entrando in questo sito, accetti i nostri Termini di Servizio e la Privacy Policy. Piattaforma riservata esclusivamente ad artisti, etichette e partner B2B di Horizon Global.", btn_accept: "Accetta ed Entra",
                 nav_ecosystem: "Ecosistema", nav_infrastructure: "Infrastruttura", nav_legal: "Legale", nav_app: "App", nav_portal: "Portale",
                 hero_badge: "Piattaforma Ufficiale Etichette e Artisti",
                 hero_title: "Il Futuro della <br/><span class='text-gradient'>Distribuzione Musicale.</span>",
@@ -444,6 +513,7 @@
                 footer_hq: "Sedi Aziendali", footer_legal: "Legale e Supporto"
             },
             es: { 
+                tc_title: "Bienvenido a Aura", tc_desc: "Al ingresar a este sitio, aceptas nuestros Términos de Servicio y Política de Privacidad. Plataforma exclusiva para artistas, sellos y socios B2B de Horizon Global.", btn_accept: "Aceptar y Entrar",
                 nav_ecosystem: "Ecosistema", nav_infrastructure: "Infraestructura", nav_legal: "Legal", nav_app: "App", nav_portal: "Portal",
                 hero_badge: "Hub Oficial de Sellos y Distribución",
                 hero_title: "El Futuro de la <br/><span class='text-gradient'>Distribución Musical.</span>",
@@ -463,6 +533,7 @@
                 footer_hq: "Sedes Corporativas", footer_legal: "Soporte Legal"
             },
             de: {
+                tc_title: "Willkommen bei Aura", tc_desc: "Durch das Betreten dieser Seite stimmst du unseren Nutzungsbedingungen und Datenschutzrichtlinien zu. Plattform ausschließlich für Künstler, Labels und B2B-Partner.", btn_accept: "Akzeptieren & Eintreten",
                 nav_ecosystem: "Ökosystem", nav_infrastructure: "Infrastruktur", nav_legal: "Rechtliches", nav_app: "App", nav_portal: "Portal",
                 hero_badge: "Offizielles Label & Vertriebs-Hub",
                 hero_title: "Die Zukunft der <br/><span class='text-gradient'>Musikdistribution.</span>",
@@ -482,6 +553,7 @@
                 footer_hq: "Hauptsitz", footer_legal: "Rechtliches & Support"
             },
             ro: {
+                tc_title: "Bun venit la Aura", tc_desc: "Prin accesarea acestui site, ești de acord cu Termenii de Serviciu și Politica de Confidențialitate. Platformă strict pentru artiști, case de discuri și parteneri B2B.", btn_accept: "Acceptă și Intră",
                 nav_ecosystem: "Ecosistem", nav_infrastructure: "Infrastructură", nav_legal: "Legal & Încredere", nav_app: "Aplicație", nav_portal: "Portal",
                 hero_badge: "Hub Oficial pentru Case de Discuri",
                 hero_title: "Viitorul <br/><span class='text-gradient'>Distribuției Muzicale.</span>",
@@ -501,6 +573,7 @@
                 footer_hq: "Sediul Central", footer_legal: "Legal & Suport"
             },
             ar: {
+                tc_title: "مرحباً بك في Aura", tc_desc: "بدخولك إلى هذا الموقع، فإنك توافق على شروط الخدمة وسياسة الخصوصية. هذه المنصة مخصصة حصرياً للفنانين وشركات الإنتاج وشركاء B2B.", btn_accept: "قبول ودخول",
                 nav_ecosystem: "النظام البيئي", nav_infrastructure: "البنية التحتية", nav_legal: "القانونية والثقة", nav_app: "التطبيق", nav_portal: "البوابة",
                 hero_badge: "المركز الرسمي للشركات والتوزيع",
                 hero_title: "مستقبل <br/><span class='text-gradient'>توزيع الموسيقى.</span>",
@@ -520,6 +593,7 @@
                 footer_hq: "المقر الرئيسي", footer_legal: "الشؤون القانونية والدعم"
             },
             ru: {
+                tc_title: "Добро пожаловать в Aura", tc_desc: "Заходя на этот сайт, вы принимаете наши Условия обслуживания и Политику конфиденциальности. Платформа исключительно для артистов, лейблов и B2B партнеров.", btn_accept: "Принять и Войти",
                 nav_ecosystem: "Экосистема", nav_infrastructure: "Инфраструктура", nav_legal: "Право", nav_app: "Приложение", nav_portal: "Портал",
                 hero_badge: "Официальный хаб дистрибуции",
                 hero_title: "Будущее <br/><span class='text-gradient'>Дистрибуции Музыки.</span>",
