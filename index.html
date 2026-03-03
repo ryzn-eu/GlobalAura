@@ -266,6 +266,39 @@
                         Monitor streams, analyze demographic data of the Aura community, and receive transparent royalty payouts directly through Ryzn Music Group.
                     </p>
                 </div>
+
+                <div class="glass-panel p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-600/20 blur-[50px] group-hover:bg-yellow-600/40 transition"></div>
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6 text-yellow-400">
+                        <i data-lucide="cpu" class="w-6 h-6 md:w-7 md:h-7"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-3" data-i18n="feat_4_title">AI-Powered Mastering</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="feat_4_desc">
+                        Enhance your tracks instantly with our built-in neural engine. Achieve studio-grade loudness and clarity optimized for all streaming platforms.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-600/20 blur-[50px] group-hover:bg-emerald-600/40 transition"></div>
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6 text-emerald-400">
+                        <i data-lucide="clapperboard" class="w-6 h-6 md:w-7 md:h-7"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-3" data-i18n="feat_5_title">Sync Licensing</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="feat_5_desc">
+                        Pitch your catalog automatically to our network of music supervisors for placements in films, TV shows, and video games.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-6 md:p-8 rounded-3xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-600/20 blur-[50px] group-hover:bg-indigo-600/40 transition"></div>
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6 text-indigo-400">
+                        <i data-lucide="users" class="w-6 h-6 md:w-7 md:h-7"></i>
+                    </div>
+                    <h3 class="text-lg md:text-xl font-bold mb-3" data-i18n="feat_6_title">Fan Engagement</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed" data-i18n="feat_6_desc">
+                        Connect deeply with your audience. Launch exclusive merch drops, pre-save campaigns, and virtual meetups directly from your artist hub.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -391,21 +424,16 @@
         const muteBtn = document.getElementById('mute-btn');
         const muteIcon = document.getElementById('mute-icon');
 
-        // Imposta un volume piacevole di base (40%)
         audioEl.volume = 0.4;
 
         function acceptTermsAndEnter() {
-            // Fai sparire il banner con un fade-out
             tcBanner.style.opacity = '0';
             tcBanner.style.visibility = 'hidden';
             
-            // Sblocca lo scroll della pagina
             document.body.classList.remove('overflow-hidden');
             
-            // Fai partire la musica (il browser lo permette perché l'utente ha fatto click)
             audioEl.play().catch(err => console.log("Errore autoplay:", err));
             
-            // Mostra il bottone per mutare l'audio
             muteBtn.classList.remove('hidden');
         }
 
@@ -420,8 +448,7 @@
             lucide.createIcons();
         }
 
-
-        // Safe Mobile Menu Toggle (Does not break Lucide SVGs)
+        // Safe Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const iconMenu = document.getElementById('icon-menu');
@@ -438,7 +465,7 @@
             }
         }
 
-        // Node IP Simulation Mechanic (Like Aura App) - Updates both Desktop & Mobile
+        // Node IP Simulation Mechanic
         function initServerNode() {
             const nodes = ['Frankfurt (EU-West)', 'Milan (EU-South)', 'Paris (EU-West)', 'London (EU-West)', 'Bucharest (EU-East)'];
             const randomNode = nodes[Math.floor(Math.random() * nodes.length)];
@@ -448,7 +475,6 @@
             const desktopNode = document.getElementById('active-node-ip-desktop');
             const mobileNode = document.getElementById('active-node-ip-mobile');
             
-            // Simulate connection delay
             setTimeout(() => {
                 if(desktopNode) desktopNode.innerText = connectionText;
                 if(mobileNode) mobileNode.innerText = connectionText;
@@ -457,20 +483,19 @@
         
         document.addEventListener('DOMContentLoaded', initServerNode);
 
-        // Language Dropdown Logic (Now visible on all devices directly from navbar)
+        // Language Dropdown Logic
         const dropdownWrapper = document.getElementById('lang-dropdown-wrapper');
         function toggleLangMenu() {
             dropdownWrapper.classList.toggle('dropdown-active');
         }
         
-        // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
             if (!dropdownWrapper.contains(e.target)) {
                 dropdownWrapper.classList.remove('dropdown-active');
             }
         });
 
-        // 100% Complete Translation Dictionary
+        // 100% Complete Translation Dictionary with New Features
         const translations = {
             en: {
                 tc_title: "Welcome to Aura", tc_desc: "By entering this site, you agree to our Terms of Service and Privacy Policy. This platform is exclusively reserved for artists, labels, and B2B partners of Horizon Global.", btn_accept: "Accept & Enter",
@@ -484,6 +509,9 @@
                 feat_1_title: "Digital Contracts", feat_1_desc: "No paper bureaucracy. Draft, sign, and manage your record and distribution agreements securely and legally, directly within the Horizon infrastructure.",
                 feat_2_title: "Immersive Uploads", feat_2_desc: "Upload HQ audio, standard artworks, 360° panoramas for immersive playback, and synchronized LRC files for smart lyrics in multiple languages.",
                 feat_3_title: "Royalties & Analytics", feat_3_desc: "Monitor streams, analyze demographic data of the Aura community, and receive transparent royalty payouts directly through Ryzn Music Group.",
+                feat_4_title: "AI-Powered Mastering", feat_4_desc: "Enhance your tracks instantly with our built-in neural engine. Achieve studio-grade loudness and clarity optimized for all streaming platforms.",
+                feat_5_title: "Sync Licensing", feat_5_desc: "Pitch your catalog automatically to our network of music supervisors for placements in films, TV shows, and video games.",
+                feat_6_title: "Fan Engagement", feat_6_desc: "Connect deeply with your audience. Launch exclusive merch drops, pre-save campaigns, and virtual meetups directly from your artist hub.",
                 tech_title: "Enterprise-Grade <br><span class='text-cyan-400'>Infrastructure.</span>",
                 tech_desc: "Aura ensures your music reaches listeners with zero latency and maximum security. Our backend is engineered to handle millions of streams while protecting your intellectual property.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "Audio files are distributed across global edge nodes, ensuring instant playback buffering regardless of the listener's geographic location.",
@@ -504,6 +532,9 @@
                 feat_1_title: "Contratti Digitali", feat_1_desc: "Nessuna burocrazia. Stipula, firma e gestisci i tuoi accordi discografici e di distribuzione direttamente nell'infrastruttura Horizon.",
                 feat_2_title: "Upload Immersivo", feat_2_desc: "Carica audio HQ, artwork, panorami 360° e file LRC sincronizzati per le smart lyrics in diverse lingue.",
                 feat_3_title: "Royalties e Dati", feat_3_desc: "Monitora gli stream, analizza i dati demografici della community di Aura e ricevi i pagamenti direttamente dalla divisione Ryzn Music Group.",
+                feat_4_title: "Mastering basato su IA", feat_4_desc: "Migliora istantaneamente le tue tracce con il nostro motore neurale. Ottieni volume e chiarezza da studio ottimizzati per tutte le piattaforme di streaming.",
+                feat_5_title: "Licenze di Sincronizzazione", feat_5_desc: "Proponi automaticamente il tuo catalogo alla nostra rete di supervisori musicali per inserimenti in film, serie TV e videogiochi.",
+                feat_6_title: "Coinvolgimento dei Fan", feat_6_desc: "Connettiti profondamente con il tuo pubblico. Lancia merch esclusivo, campagne di pre-salvataggio e incontri virtuali direttamente dal tuo hub artista.",
                 tech_title: "Infrastruttura <br><span class='text-cyan-400'>Avanzata.</span>",
                 tech_desc: "Aura garantisce che la tua musica raggiunga gli ascoltatori con zero latenza e massima sicurezza. Il nostro backend gestisce milioni di stream proteggendo la tua proprietà.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "I file audio sono distribuiti su nodi globali, garantendo un buffering istantaneo a prescindere dalla posizione dell'ascoltatore.",
@@ -524,6 +555,9 @@
                 feat_1_title: "Contratos Digitales", feat_1_desc: "Firma y gestiona acuerdos de distribución de forma segura a través de nuestra plataforma Horizon.",
                 feat_2_title: "Cargas Inmersivas", feat_2_desc: "Sube audio HQ, portadas 360° y archivos LRC para letras inteligentes en varios idiomas.",
                 feat_3_title: "Regalías y Análisis", feat_3_desc: "Monitorea streams, analiza datos demográficos y recibe pagos transparentes a través de Ryzn Music Group.",
+                feat_4_title: "Masterización con IA", feat_4_desc: "Mejora tus pistas instantáneamente con nuestro motor neuronal. Consigue calidad de estudio optimizada para todas las plataformas de streaming.",
+                feat_5_title: "Licencias de Sincronización", feat_5_desc: "Presenta automáticamente tu catálogo a nuestra red de supervisores musicales para películas, programas de televisión y videojuegos.",
+                feat_6_title: "Participación de los Fans", feat_6_desc: "Conecta profundamente con tu audiencia. Lanza merchandising exclusivo, campañas de pre-guardado y reuniones virtuales desde tu hub de artista.",
                 tech_title: "Infraestructura <br><span class='text-cyan-400'>Avanzada.</span>",
                 tech_desc: "Nuestro backend está diseñado para manejar millones de reproducciones con cero latencia y máxima seguridad para tu propiedad intelectual.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "Archivos distribuidos globalmente para una reproducción instantánea sin importar la ubicación del oyente.",
@@ -544,6 +578,9 @@
                 feat_1_title: "Digitale Verträge", feat_1_desc: "Keine Papierbürokratie. Erstelle, unterzeichne und verwalte deine Vertriebsverträge rechtssicher direkt in der Horizon-Infrastruktur.",
                 feat_2_title: "Immersive Uploads", feat_2_desc: "Lade HQ-Audio, 360°-Panoramen und LRC-Dateien für smarte Lyrics in mehreren Sprachen hoch.",
                 feat_3_title: "Tantiemen & Analysen", feat_3_desc: "Überwache Streams, analysiere demografische Daten und erhalte transparente Auszahlungen durch die Ryzn Music Group.",
+                feat_4_title: "KI-gestütztes Mastering", feat_4_desc: "Verbessere deine Tracks sofort mit unserer neuronalen Engine. Erreiche Studio-Klangqualität, optimiert für alle Streaming-Plattformen.",
+                feat_5_title: "Sync-Lizenzierung", feat_5_desc: "Biete deinen Katalog automatisch unserem Netzwerk von Musik-Supervisoren für Platzierungen in Filmen, TV-Shows und Videospielen an.",
+                feat_6_title: "Fan-Engagement", feat_6_desc: "Verbinde dich tief mit deinem Publikum. Starte exklusive Merch-Drops, Pre-Save-Kampagnen und virtuelle Meetups direkt von deinem Künstler-Hub.",
                 tech_title: "Enterprise-Grade <br><span class='text-cyan-400'>Infrastruktur.</span>",
                 tech_desc: "Aura stellt sicher, dass deine Musik die Hörer ohne Latenz erreicht. Unser Backend schützt deine geistigen Eigentumsrechte.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "Audiodateien werden über globale Knoten verteilt, um sofortiges Buffering weltweit zu gewährleisten.",
@@ -564,6 +601,9 @@
                 feat_1_title: "Contracte Digitale", feat_1_desc: "Fără birocrație de hârtie. Semnează și gestionează acordurile direct și legal în infrastructura Horizon.",
                 feat_2_title: "Încărcări Imersive", feat_2_desc: "Încarcă fișiere audio HQ, panorame 360° și fișiere LRC pentru versuri inteligente în mai multe limbi.",
                 feat_3_title: "Redevențe & Analitice", feat_3_desc: "Monitorizează ascultările, analizează datele și primește plăți transparente prin divizia Ryzn Music Group.",
+                feat_4_title: "Masterizare cu IA", feat_4_desc: "Îmbunătățește-ți piesele instantaneu cu motorul nostru neural. Obține o claritate de studio optimizată pentru toate platformele de streaming.",
+                feat_5_title: "Licențiere Sync", feat_5_desc: "Prezintă-ți automat catalogul rețelei noastre de supervizori muzicali pentru plasamente în filme, emisiuni TV și jocuri video.",
+                feat_6_title: "Interacțiune cu Fanii", feat_6_desc: "Conectează-te profund cu publicul tău. Lansează produse exclusive, campanii de pre-salvare și întâlniri virtuale direct din hub-ul tău de artist.",
                 tech_title: "Infrastructură de <br><span class='text-cyan-400'>Nivel Enterprise.</span>",
                 tech_desc: "Backend-ul nostru gestionează milioane de ascultări cu latență zero, protejându-ți proprietatea intelectuală.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "Fișierele audio sunt distribuite pe noduri globale pentru o redare instantanee oriunde pe glob.",
@@ -584,6 +624,9 @@
                 feat_1_title: "عقود رقمية", feat_1_desc: "لا مزيد من المعاملات الورقية. قم بتوقيع وإدارة عقودك بأمان وقانونية عبر منصة Horizon.",
                 feat_2_title: "تحميلات غامرة", feat_2_desc: "قم بتحميل صوت عالي الجودة وصور 360 درجة وملفات LRC لكلمات الأغاني المترجمة.",
                 feat_3_title: "الأرباح والتحليلات", feat_3_desc: "راقب استماعاتك، وحلل بيانات الجمهور، واحصل على مدفوعاتك بشفافية عبر Ryzn Music Group.",
+                feat_4_title: "إتقان الصوت بالذكاء الاصطناعي", feat_4_desc: "حسّن مقاطعك الصوتية فوراً باستخدام محركنا العصبي. احصل على جودة استوديو محسنة لجميع منصات البث.",
+                feat_5_title: "تراخيص المزامنة", feat_5_desc: "اعرض كتالوجك الموسيقي تلقائيًا على شبكتنا من مشرفي الموسيقى للاستخدام في الأفلام، والبرامج التلفزيونية، وألعاب الفيديو.",
+                feat_6_title: "تفاعل المعجبين", feat_6_desc: "تواصل بعمق مع جمهورك. أطلق سلعاً حصرية، وحملات حفظ مسبق، ولقاءات افتراضية مباشرة من منصة الفنان الخاصة بك.",
                 tech_title: "بنية تحتية <br><span class='text-cyan-400'>بمستوى الشركات.</span>",
                 tech_desc: "يضمن Aura وصول موسيقاك للمستمعين بدون تأخير. خوادمنا مصممة للتعامل مع ملايين الاستماعات بأمان.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "يتم توزيع الملفات الصوتية عالميًا لضمان التشغيل الفوري في أي مكان في العالم.",
@@ -604,6 +647,9 @@
                 feat_1_title: "Цифровые контракты", feat_1_desc: "Никакой бумажной волокиты. Подписывайте договоры и управляйте соглашениями прямо в инфраструктуре Horizon.",
                 feat_2_title: "Иммерсивная загрузка", feat_2_desc: "Загружайте HQ аудио, 360° панорамы и синхронизированные тексты (LRC) на разных языках.",
                 feat_3_title: "Роялти и аналитика", feat_3_desc: "Отслеживайте прослушивания, анализируйте данные и получайте прозрачные выплаты от Ryzn Music Group.",
+                feat_4_title: "ИИ-Мастеринг", feat_4_desc: "Мгновенно улучшайте свои треки с помощью нашей нейросети. Добейтесь студийного качества, оптимизированного для всех стриминговых платформ.",
+                feat_5_title: "Синхро-лицензирование", feat_5_desc: "Автоматически предлагайте свой каталог нашей сети музыкальных супервайзеров для использования в фильмах, ТВ-шоу и видеоиграх.",
+                feat_6_title: "Взаимодействие с фанатами", feat_6_desc: "Установите глубокую связь с вашей аудиторией. Запускайте эксклюзивный мерч, pre-save кампании и виртуальные встречи прямо из вашего хаба.",
                 tech_title: "Инфраструктура <br><span class='text-cyan-400'>Enterprise-уровня.</span>",
                 tech_desc: "Backend Aura выдерживает миллионы потоков с нулевой задержкой, защищая вашу интеллектуальную собственность.",
                 tech_li1_title: "Global Edge CDN", tech_li1_desc: "Аудиофайлы распределяются по глобальным узлам для мгновенного воспроизведения в любой точке мира.",
